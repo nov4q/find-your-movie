@@ -1,0 +1,119 @@
+{
+    "common":{
+        "ViewAll":"View all"
+    },
+    "onboarding":{
+        "skip":"Skip",
+        "GotIt":"Got it",
+        "titles":{
+            "Explore":"Explore",
+            "WhatsPopular":"Popular?",
+            "Watchlist":"Add to watchlist",
+            "Vote":"Vote"
+        },
+        "subtitles":{
+            "Explore":"Explore and find new exciting movies!",
+            "WhatsPopular":"Find currently popular movies!",
+            "Watchlist":"Add intriguing movies to your watchlist!",
+            "Vote":"Rate and check movie ratings!"
+        }
+    },
+    "welcome":{
+        "Hi" : "Welcome.",
+        "Start" : "Millions of movies, TV shows and people to discover. Explore now.",
+        "Login" : "Login",
+        "Password" : "Password",
+        "LoginBtn" : "Log in",
+        "DiscoveryPage": "Discovery",
+        "ErrorMessage": "Email or password is incorrect",
+        "ErrorLabel": "Error",
+        "NoAccount":"Don't have an account?",
+        "Register":"Register"
+    },
+    "search":{
+        "SearchNotice" : "Type something to search",
+        "ResultsNotFoundNotice" : "No results found",
+        "SearchField" : "Search",
+        "TitleNotFound" : "Title Not Found",
+        "YearNotFound" : "Year not found"
+    },
+    "discover":{
+        "headlines":{
+            "AppBarTitle":"Discover",
+            "Tags":"Browse by tags",
+            "Popular":"Popular",
+            "ViewAll":"View all",
+            "Favorite":"Favorite",
+            "TopRated":"Top rated",
+            "NowPlaying":"Now Playing",
+            "Upcoming":"Upcoming",
+            "MyWatchlist":"My watchlist"
+        },
+        "tags":{
+            "Action":"Action",
+            "Adventure":"Adventure",
+            "Animtion":"Animtion"
+        }
+    },
+    "person":{
+        "PopularityLabel":"Popularity",
+        "FirstNameNotFound":"Not",
+        "LastNameNotFound":"Found",
+        "BiographyNotFound":"Biography not found",
+        "BirthdayNotFound":"Birthday not found",
+        "BirthplaceNotFound":"Birthplace not found",
+        "Birthday":"Date of birth",
+        "Birthplace":"Place of birth",
+        "KnownFor":"Known for",
+        "Photos":"Photos",
+        "ExpandBiography":"More"
+    },
+    "gallery":{
+        "GalleryLabel":"Gallery"
+    },
+    "emotes":{
+        "Action":"Action",
+        "Adventure":"Adventure",
+        "Animation":"Animation",
+        "Comedy":"Comedy",
+        "Crime":"Crime",
+        "Documentary":"Documentary",
+        "Drama":"Drama",
+        "Family":"Family",
+        "Fantasy":"Fantasy",
+        "History":"History",
+        "Horror":"Horror",
+        "Music":"Music",
+        "Romance":"Romance",
+        "ScienceFiction":"Science Fiction",
+        "TVMovie":"TV Movie",
+        "Thriller":"Thriller",
+        "War":"War",
+        "Western":"Western"
+    },
+    "details":{
+        "Director": "Director",
+        "Writers": "Writers",
+        "Production": "Production",
+        "Distributor": "Distributor",
+        "ReleaseDate": "Release Date",
+        "OriginalLanguage": "Original Language",
+        "Ratings": "Ratings",
+        "Budget": "Budget",
+        "ChangeRate": "Change rate",
+        "RateMovie": "Rate this movie",
+        "Popularity": "Popularity",
+        "SaveChanges": "Save changes",
+        "MyVote": "MyVote",
+        "More": "More",
+        "MovieAddFavorites" : "Movie has been added to your favourites.",
+        "MovieDeleteFavoritess" : "Movie has been deleted from your favourites.",
+        "MovieAddWatchlist" : "Movie has been added to your watchlist.",
+        "MovieDeleteWatchlist" : "Movie has been deleted from your watchlist.",
+        "Cast" : "Cast",
+        "SimilarMovies": "Similar Movies",
+        "ErrorDetails" : "Error occured",
+        "NoDate" : "Date Unknown",
+        "NoYear" : "Year Unknown"
+    }
+}
