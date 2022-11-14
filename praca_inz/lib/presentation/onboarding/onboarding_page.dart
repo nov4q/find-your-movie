@@ -31,7 +31,7 @@ class OnboardingPage extends HookWidget {
           current.mapOrNull(
         display: (value) {},
         skip: (value) => context.router.replace(
-          const LoginPageRoute(),
+          const LoginPageRoute(), //TODO change to main page
         ),
       ),
     );
@@ -117,7 +117,7 @@ class _OnboardingPageBuilder extends HookWidget {
           Align(
             alignment: AlignmentDirectional.topStart,
             child: GestureDetector(
-              onTap: () => context.router.replace(const LoginPageRoute()),
+              onTap: () => context.router.replace(const LoginPageRoute()), //TODO change to main page
               child: Padding(
                 padding: const EdgeInsets.only(
                   top: AppDimens.l,
@@ -197,7 +197,7 @@ class _OnboardingPageBody extends StatelessWidget {
               width: MediaQuery.of(context).size.width - AppDimens.c,
               height: AppDimens.c,
               child: TextButton(
-                onPressed: () => context.router.replace(const LoginPageRoute()),
+                onPressed: () => context.router.replace(const LoginPageRoute()), //TODO change to main page
                 style: ButtonStyle(
                   backgroundColor:
                       MaterialStateProperty.all(customTheme.primary100),
