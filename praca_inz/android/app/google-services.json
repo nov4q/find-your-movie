@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "456925591423",
+    "firebase_url": "https://movies-d444d-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "movies-d444d",
     "storage_bucket": "movies-d444d.appspot.com"
   },
@@ -29,6 +30,13 @@
             {
               "client_id": "456925591423-tfjfks3s4a1bi9bc6j13q45adr0o93p1.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "456925591423-rnf8fcni75ilcje2i2n69d0du6h6kn9t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.pracaInz"
+              }
             }
           ]
         }

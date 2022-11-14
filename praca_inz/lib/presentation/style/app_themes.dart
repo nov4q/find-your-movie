@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:theme_tailor_annotation/theme_tailor_annotation.dart';
 
@@ -6,7 +8,9 @@ import 'app_typography.dart';
 
 part 'app_themes.tailor.dart';
 
-@Tailor(themes: ['lightTheme', 'darkTheme'])
+@Tailor(themes: ['lightTheme', 'darkTheme'],
+  themeGetter: ThemeGetter.onBuildContext,
+)
 class _$CustomAppTheme {
   /// Colors
   static final primary100 = [

@@ -42,6 +42,7 @@ dependencies:
   firebase_core: 2.1.0
   firebase_database: 10.0.2
   firebase_auth: ^4.0.2
+  google_sign_in: 5.4.2
 
 
 
@@ -56,7 +57,7 @@ dev_dependencies:
   auto_route_generator: 4.2.0
   retrofit_generator: 4.0.2
   pretty_dio_logger: 1.2.0-beta-1
-  theme_tailor: 1.0.5
+  theme_tailor: 1.0.6
 
 
 
@@ -66,6 +67,7 @@ flutter:
   assets:
     - assets/translations/
     - assets/fonts/
+    - assets/images/
 
   fonts:
     - family: Mulish
