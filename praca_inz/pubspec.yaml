@@ -39,10 +39,12 @@ dependencies:
   flutter_native_splash: 2.2.8
   flutter_launcher_icons: 0.10.0
   url_launcher: 6.1.5
-  firebase_core: 2.1.0
+  firebase_core: 2.3.0
   firebase_database: 10.0.2
-  firebase_auth: ^4.0.2
+  firebase_auth: 4.0.2
   google_sign_in: 5.4.2
+  cloud_firestore: 4.1.0
+  firebase_storage: 11.0.6
 
 
 
@@ -68,6 +70,7 @@ flutter:
     - assets/translations/
     - assets/fonts/
     - assets/images/
+    - assets/emoticons/
 
   fonts:
     - family: Mulish

@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:praca_inzynierska/use_case/authorization/auth_use_case.dart';
 
@@ -8,9 +9,16 @@ part 'authorization_cubit.freezed.dart';
 
 @injectable
 class AuthorizationCubit extends Cubit<AuthorizationState> {
+  AuthorizationCubit(
+    this._authUseCase,
+  ) : super(const AuthorizationState.unAuthenticated());
+
   final AuthUseCase _authUseCase;
-  AuthorizationCubit(this._authUseCase)
-      : super(const AuthorizationState.unAuthenticated());
+  String username = '';
+
+  void init() {
+    emit(const _UnAuthenticated());
+  }
 
   Future<void> signInRequested(String email, String password) async {
     emit(const _Loading());
@@ -19,8 +27,8 @@ class AuthorizationCubit extends Cubit<AuthorizationState> {
         email,
         password,
       );
-
-      emit(const _Authenticated());
+      username = await _authUseCase.getUsername();
+      emit(_Authenticated(username: username));
     } catch (e) {
       emit(_AuthError(e.toString()));
       emit(const _UnAuthenticated());
@@ -34,7 +42,7 @@ class AuthorizationCubit extends Cubit<AuthorizationState> {
         email,
         password,
       );
-      emit(const _Authenticated());
+      emit(_Authenticated(username: username));
     } catch (e) {
       emit(_AuthError(e.toString()));
       emit(const _UnAuthenticated());
@@ -45,7 +53,9 @@ class AuthorizationCubit extends Cubit<AuthorizationState> {
     emit(const _Loading());
     try {
       await _authUseCase.signInWithGoogleUseCase();
-      emit(const _Authenticated());
+
+      username = await _authUseCase.getUsername();
+      emit(_Authenticated(username: username));
     } catch (e) {
       emit(_AuthError(e.toString()));
       emit(const _UnAuthenticated());
@@ -54,6 +64,7 @@ class AuthorizationCubit extends Cubit<AuthorizationState> {
 
   Future<void> signOutRequested() async {
     emit(const _Loading());
+    
     await _authUseCase.signOutUseCase();
     emit(const _UnAuthenticated());
   }

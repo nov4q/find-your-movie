@@ -109,10 +109,14 @@ class AppDimens {
   static const navbarHeight = 92.0;
 
   static const headerHeight = 128.0;
+  
   static const systemsHeaderHeight = 136.0;
 
   static const underlinePadding = -3.0;
 
   static const systemElementHeight = 112.0;
+
   static const fixedTextSize = 1.25;
+
+  static const tagWidgetHeight= 1.25;
 }

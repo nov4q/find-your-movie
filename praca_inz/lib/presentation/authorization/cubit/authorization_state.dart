@@ -6,7 +6,9 @@ class AuthorizationState with _$AuthorizationState {
   const factory AuthorizationState.loading() = _Loading;
 
   /// When the user is authenticated the state is changed to Authenticated.
-  const factory AuthorizationState.authenticated() = _Authenticated;
+  const factory AuthorizationState.authenticated({
+    required String username,
+  }) = _Authenticated;
 
   /// This is the initial state of the bloc. When the user is not authenticated the state is changed to Unauthenticated.
   const factory AuthorizationState.unAuthenticated() = _UnAuthenticated;

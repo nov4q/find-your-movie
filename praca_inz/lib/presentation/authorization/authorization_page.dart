@@ -33,10 +33,6 @@ class AuthorizationPage extends HookWidget {
               onPressed: () => cubit.googleSignInRequested(),
               child: const Text('google sign in'),
             ),
-            // TextButton(
-            //   onPressed: () => cubit.signInRequested(),
-            //   child: const Text('google sign in'),
-            // ),
           ],
         ),
       ),
