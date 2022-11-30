@@ -3,9 +3,8 @@ import 'package:injectable/injectable.dart';
 
 import 'configure_dependencies.config.dart';
 
-final getIt = GetIt.instance;
+
+final GetIt getIt = GetIt.instance;
 
 @InjectableInit(preferRelativeImports: true)
-Future<void> configureDependencies() async {
-  $initGetIt(getIt);
-}
+Future<void> configureDependencies() => $initGetIt(getIt);

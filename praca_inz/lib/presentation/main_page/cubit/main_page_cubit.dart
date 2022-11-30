@@ -13,8 +13,8 @@ class MainPageCubit extends Cubit<MainPageState> {
   final MoviesUseCase _moviesUseCase;
   List<Movie> allMoviesList = [];
 
-  void init() {
-    getMovies();
+  Future<void> init() async {
+    await getMovies();
     _emitIdle();
   }
 

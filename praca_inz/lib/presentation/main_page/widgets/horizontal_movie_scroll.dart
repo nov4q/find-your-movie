@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:praca_inzynierska/domain/firebase/models/movie/movie_model.f.dart';
 import 'package:praca_inzynierska/presentation/style/app_dimens.dart';
 import 'package:praca_inzynierska/presentation/style/app_themes.dart';
 
@@ -9,7 +10,7 @@ class HorizontalMovieScroll extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final List movies;
+  final List<Movie> movies;
   final String title;
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class HorizontalMovieScroll extends StatelessWidget {
         SizedBox(
           height: AppDimens.xxc,
           child: ListView.separated(
-            itemCount: 20,
+            itemCount: movies.length,
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             separatorBuilder: (context, index) => const VerticalDivider(
@@ -32,7 +33,7 @@ class HorizontalMovieScroll extends StatelessWidget {
               width: AppDimens.s,
             ),
             itemBuilder: (context, index) {
-              return Text('data');
+              return Text(movies[index].title );
             },
           ),
         ),

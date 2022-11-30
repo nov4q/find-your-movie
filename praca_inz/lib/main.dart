@@ -3,8 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
+import 'package:praca_inzynierska/data/DI/configure_dependencies.dart';
 
-import 'core/di/injector.dart';
 import 'presentation/routing/main_router.gr.dart';
 import 'presentation/style/app_themes.dart';
 
