@@ -8,7 +8,6 @@ import 'package:praca_inzynierska/domain/firebase/models/movie/movie_model.f.dar
 
 @Injectable(as: MoviesRepo)
 class MoviesRepositoryImpl implements MoviesRepo {
-
   MoviesRepositoryImpl(this._mapper);
   final MovieFromMovieDtoMapper _mapper;
   List<MovieDTO> _movieList = [];
@@ -16,16 +15,14 @@ class MoviesRepositoryImpl implements MoviesRepo {
   FirebaseFirestore get firestore => FirebaseFirestore.instance;
   FirebaseStorage get storage => FirebaseStorage.instance;
 
-
   @override
   Future<List<Movie>> getAllMovies() async {
-    final db = firestore.collection('movies');
-
-    await db.get().then(
+    final allMoviesCollection = firestore.collection('all-movies');
+    await allMoviesCollection.get().then(
       (data) {
         _movieList = data.docs
             .map(
-              (document) => MovieDTO.fromJson(document.data()),
+              (movie) => MovieDTO.fromJson(movie.data()),
             )
             .toList();
       },

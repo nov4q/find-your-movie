@@ -52,7 +52,7 @@ class MainPage extends HookWidget {
             child: Padding(
               padding: const EdgeInsets.only(left: AppDimens.l),
               child: Text(
-                'Authenticated',
+                movieCubit.getName(),
                 style: customTheme.style10.copyWith(
                   color: customTheme.error100,
                 ),

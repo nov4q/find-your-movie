@@ -6,19 +6,18 @@ import 'package:praca_inzynierska/domain/others/mapper/data_mapper.dart';
 
 @injectable
 class MovieFromMovieDtoMapper extends DataMapper<MovieDTO, Movie> {
-  
   @override
   Movie call(MovieDTO data) {
     return Movie(
-      title: data.title,
-      genre: data.genre,
-      poster: data.poster,
-      awards: data.awards,
-      director: data.director,
-      production: data.production,
-      actors: data.actors,
-      language: data.language,
-      year: data.year,
+      title: data.Title,
+      genre: data.Genre,
+      poster: data.Poster,
+      awards: data.Awards,
+      director: data.Director,
+      production: data.Production,
+      actors: data.Actors,
+      language: data.Language,
+      year: data.Year,
     );
   }
 }

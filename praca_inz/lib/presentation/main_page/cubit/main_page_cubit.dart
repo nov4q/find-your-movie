@@ -22,4 +22,6 @@ class MainPageCubit extends Cubit<MainPageState> {
 
   Future<void> getMovies() async =>
       allMoviesList = await _moviesUseCase.getAllMoviesUseCase();
+
+  String getName() => allMoviesList.first.title;
 }

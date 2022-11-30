@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:praca_inzynierska/use_case/authorization/auth_use_case.dart';
 
@@ -64,7 +63,7 @@ class AuthorizationCubit extends Cubit<AuthorizationState> {
 
   Future<void> signOutRequested() async {
     emit(const _Loading());
-    
+
     await _authUseCase.signOutUseCase();
     emit(const _UnAuthenticated());
   }

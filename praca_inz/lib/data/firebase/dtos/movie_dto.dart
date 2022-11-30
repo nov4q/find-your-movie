@@ -3,30 +3,33 @@ part 'movie_dto.g.dart';
 
 @JsonSerializable() // TODO? W bazie sa zaczynajace sie z duzych ;liter
 class MovieDTO {
-  MovieDTO({
-    required this.title,
-    required this.genre,
-    required this.poster,
-    required this.awards,
-    required this.director,
-    required this.production,
-    required this.actors,
-    required this.language,
-    required this.year,
+  MovieDTO(this.Plot, {
+    required this.Title,
+    required this.Genre,
+    required this.Poster,
+    required this.Awards,
+    required this.Director,
+    required this.Production,
+    required this.Actors,
+    required this.Language,
+    required this.Year,
   });
 
-  final String title;
-  final String genre;
-  final String poster;
-  final String awards;
-  final String director;
-  final String production;
-  final String actors;
-  final String language;
-  final String year;
+  final String Title;
+  final String Genre;
+  final String Poster;
+  final String Awards;
+  final String Director;
+  final String Production;
+  final String Actors;
+  final String Language;
+  final String Year;
+  final String Plot;
 
-  factory MovieDTO.fromJson(Map<String, dynamic> json) =>
+  factory MovieDTO.fromJson(Map<String, Object?> json) =>
       _$MovieDTOFromJson(json);
 
   Map<String, dynamic> toJson() => _$MovieDTOToJson(this);
+
+ 
 }
