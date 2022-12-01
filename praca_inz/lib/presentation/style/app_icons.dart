@@ -1,5 +1,10 @@
 class AppIcon {
   static const _iconPath = "assets/icons";
+  static const _imagePath = "assets/images";
+
+  static const googleLogo = "$_imagePath/google-48.svg";
+
+  static const noCover = "$_imagePath/no-cover.svg";
 
   static const back = "$_iconPath/back.svg";
   static const calendar = "$_iconPath/calendar.svg";
@@ -160,5 +165,4 @@ class AppIcon {
   static const closeButtonTransparent = "$_iconPath/close_transparent.svg";
 
   static const checkNoBg = "$_iconPath/check_no_bg.svg";
-  static const lottoMatorLogo = "$_iconPath/logo_lottomator.png";
 }

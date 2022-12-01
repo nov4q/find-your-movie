@@ -51,6 +51,8 @@ class AppDimens {
   static const xxxxc = 100.0;
   //120.0
   static const d = 120.0;
+  //120.0
+  static const g = 200.0;
   //6.0
   static const six = 6.0;
 

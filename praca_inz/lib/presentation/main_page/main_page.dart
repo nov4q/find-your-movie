@@ -46,6 +46,17 @@ class MainPage extends HookWidget {
           ),
           appBar: AppBar(
             backgroundColor: customTheme.primary90,
+            actions: [
+              GestureDetector(
+                onTap: () {},
+                child: const Padding(
+                  padding: EdgeInsets.only(
+                    right: AppDimens.ten,
+                  ),
+                  child: Icon(Icons.search),
+                ),
+              ),
+            ],
           ),
           body: SafeArea(
             child: Padding(
@@ -58,6 +69,7 @@ class MainPage extends HookWidget {
                       orElse: () => [],
                     ),
                     title: 'All Movies',
+                    onCoverTap: () {},
                   ),
                 ],
               ),
