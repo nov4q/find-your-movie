@@ -12,6 +12,7 @@ class MainPageCubit extends Cubit<MainPageState> {
   MainPageCubit(this._moviesUseCase) : super(const MainPageState.initial());
   final MoviesUseCase _moviesUseCase;
   List<Movie> allMoviesList = [];
+  List<Movie> topRatedMoviesList = [];
 
   Future<void> init() async {
     await getMovies();
@@ -23,5 +24,11 @@ class MainPageCubit extends Cubit<MainPageState> {
   Future<void> getMovies() async =>
       allMoviesList = await _moviesUseCase.getAllMoviesUseCase();
 
+  Future<void> getTopRatedMovies() async =>
+      allMoviesList = await _moviesUseCase.getTopRatedMoviesUseCase();
+
   String getName() => allMoviesList.first.title;
+
+  Future<void> getMovieDetails(String title) =>
+      _moviesUseCase.getSingleMovieDetails(title);
 }

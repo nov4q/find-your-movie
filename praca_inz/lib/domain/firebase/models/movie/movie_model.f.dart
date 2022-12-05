@@ -14,5 +14,13 @@ class Movie with _$Movie {
     required String actors,
     required String language,
     required String year,
-  }) = _Movie;
+    required String plot,
+  }
+  ) = _Movie;
+}
+
+extension on Movie {
+  bool titleIsNotEmpty() {
+    return title.isNotEmpty;
+  }
 }

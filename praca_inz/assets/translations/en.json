@@ -41,6 +41,7 @@
         "headlines":{
             "AppBarTitle":"Discover",
             "Tags":"Browse by tags",
+            "All":"Wszystkie",
             "Popular":"Popular",
             "ViewAll":"View all",
             "Favorite":"Favorite",

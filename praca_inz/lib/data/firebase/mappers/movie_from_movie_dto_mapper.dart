@@ -18,6 +18,7 @@ class MovieFromMovieDtoMapper extends DataMapper<MovieDTO, Movie> {
       actors: data.Actors,
       language: data.Language,
       year: data.Year,
+      plot: data.Plot ?? 'No description',
     );
   }
 }

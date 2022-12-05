@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -14,7 +13,7 @@ class AuthorizationCubit extends Cubit<AuthorizationState> {
   ) : super(const AuthorizationState.unAuthenticated());
 
   final AuthUseCase _authUseCase;
-  String username = ''; //TODO delete
+  String username = '';
   // late User currentUser;
 
   void init() {
@@ -28,7 +27,6 @@ class AuthorizationCubit extends Cubit<AuthorizationState> {
         email,
         password,
       );
-      // currentUser = await _authUseCase.getUser();
       username = await _authUseCase.getUsername();
       emit(_Authenticated(
         username: username,

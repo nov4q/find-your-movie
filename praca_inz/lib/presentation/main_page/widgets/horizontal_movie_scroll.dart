@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:praca_inzynierska/domain/firebase/models/movie/movie_model.f.dart';
+import 'package:praca_inzynierska/presentation/routing/main_router.gr.dart';
 import 'package:praca_inzynierska/presentation/style/app_dimens.dart';
 import 'package:praca_inzynierska/presentation/style/app_icons.dart';
 import 'package:praca_inzynierska/presentation/style/app_themes.dart';
@@ -47,7 +49,10 @@ class HorizontalMovieScroll extends StatelessWidget {
                     height: AppDimens.g,
                     width: AppDimens.d,
                     child: GestureDetector(
-                      onTap: onCoverTap,
+                      onTap: () => navigateToMovieDetailsPage(
+                        context: context,
+                        title: movies[index].title,
+                      ),
                       child: CachedNetworkImage(
                         imageUrl: movies[index].poster,
                         fit: BoxFit.cover,
@@ -82,4 +87,10 @@ class HorizontalMovieScroll extends StatelessWidget {
       ),
     );
   }
+
+  void navigateToMovieDetailsPage({
+    required BuildContext context,
+    required String title,
+  }) =>
+      context.router.push(SingleMovieDetailsPageRoute(movieTitle: title));
 }

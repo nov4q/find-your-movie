@@ -38,6 +38,40 @@ abstract class MoviesRepositoryImpl
       },
     );
 
-    return _movieList.map((element) => _mapper(element)).toList();
+    return _movieList.map((element) => mapper(element)).toList();
+  }
+
+  @Cached()
+  @override
+  Future<List<Movie>> getTopRatedMovies() async { //TODO !!!! INNY MAPPER, Inne DTO 
+    final allMoviesCollection = firestore.collection('top-rated-movies');
+    await allMoviesCollection.get().then(
+      (data) {
+        _movieList = data.docs
+            .map(
+              (movie) => MovieDTO.fromJson(movie.data()),
+            )
+            .toList();
+      },
+    );
+
+    return _movieList.map((element) => mapper(element)).toList();
+  }
+
+  @Cached()
+  @override
+  Future<List<Movie>> getMovieDetails(String title) async {
+    final allMoviesCollection = firestore.collection('all-movies').where('Title',isEqualTo: title);
+    await allMoviesCollection.get().then(
+      (data) {
+        _movieList = data.docs
+            .map(
+              (movie) => MovieDTO.fromJson(movie.data()),
+            )
+            .toList();
+      },
+    );
+
+    return _movieList.map((element) => mapper(element)).toList();
   }
 }

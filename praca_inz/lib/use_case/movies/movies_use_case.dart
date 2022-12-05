@@ -10,4 +10,10 @@ class MoviesUseCase {
 
   Future<List<Movie>> getAllMoviesUseCase() async =>
       _authRepository.getAllMovies();
+
+  Future<List<Movie>> getTopRatedMoviesUseCase() async =>
+      _authRepository.getTopRatedMovies();
+
+  Future<List<Movie>> getSingleMovieDetails(String title) async =>
+      _authRepository.getMovieDetails(title);
 }

@@ -10,4 +10,7 @@ abstract class MoviesRepo {
 
   Future<List<Movie>> getAllMovies();
 
+  Future<List<Movie>> getTopRatedMovies();
+
+  Future<List<Movie>> getMovieDetails(String title);
 }

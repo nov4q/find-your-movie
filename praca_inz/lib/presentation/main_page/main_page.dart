@@ -1,9 +1,6 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
-import 'package:praca_inzynierska/data/firebase/movies/movies_repo.dart';
-import 'package:praca_inzynierska/generated/local_keys.g.dart';
 import 'package:praca_inzynierska/presentation/authorization/cubit/authorization_cubit.dart';
 import 'package:praca_inzynierska/presentation/common/side_drawer.dart';
 import 'package:praca_inzynierska/presentation/main_page/cubit/main_page_cubit.dart';
@@ -68,7 +65,15 @@ class MainPage extends HookWidget {
                       idle: (value) => value.allMoviesList,
                       orElse: () => [],
                     ),
-                    title: 'All Movies',
+                    title: 'Wszystkie Filmy',
+                    onCoverTap: () {},
+                  ),
+                  HorizontalMovieScroll(
+                    movies: movieState.maybeMap(
+                      idle: (value) => value.allMoviesList,
+                      orElse: () => [],
+                    ),
+                    title: 'Najlepiej ocenianie',
                     onCoverTap: () {},
                   ),
                 ],
