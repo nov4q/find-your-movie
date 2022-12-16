@@ -3,7 +3,7 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'movie_dto.g.dart';
 
-@JsonSerializable() // TODO? W bazie sa zaczynajace sie z duzych ;liter
+@JsonSerializable()
 class MovieDTO {
   MovieDTO(
     this.Plot, {

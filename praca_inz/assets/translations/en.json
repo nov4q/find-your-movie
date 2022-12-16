@@ -9,13 +9,13 @@
             "Explore":"Explore",
             "WhatsPopular":"Popular?",
             "Watchlist":"Add to watchlist",
-            "Vote":"Vote"
+            "Favourites":"Favourites"
         },
         "subtitles":{
             "Explore":"Explore and find new exciting movies!",
             "WhatsPopular":"Find currently popular movies!",
             "Watchlist":"Add intriguing movies to your watchlist!",
-            "Vote":"Rate and check movie ratings!"
+            "favourites":"Add to favourites!"
         }
     },
     "welcome":{

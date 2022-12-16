@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
-import 'package:praca_inzynierska/data/firebase/authorization/auth_repository.dart';
+import 'package:praca_inzynierska/data/firebase/authorization/user_repository.dart';
 
 @injectable
 class AuthUseCase {
-  final AuthRepository _authRepository;
+  final UserRepository _authRepository;
 
   AuthUseCase(this._authRepository);
 

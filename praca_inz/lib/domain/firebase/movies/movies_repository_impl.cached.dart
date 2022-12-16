@@ -10,18 +10,22 @@ part of 'movies_repository_impl.dart';
 
 abstract class _$MoviesRepositoryImpl {
   MovieFromMovieDtoMapper get mapper;
+  MovieRepresentationFromMovieRepresentationDtoMapper get representationMapper;
 }
 
 class _MoviesRepositoryImpl
     with MoviesRepositoryImpl
     implements _$MoviesRepositoryImpl {
-  _MoviesRepositoryImpl(this.mapper);
+  _MoviesRepositoryImpl(this.mapper, this.representationMapper);
 
   @override
   final MovieFromMovieDtoMapper mapper;
+  @override
+  final MovieRepresentationFromMovieRepresentationDtoMapper
+      representationMapper;
 
   final _getAllMoviesCached = <String, List<Movie>>{};
-  final _getTopRatedMoviesCached = <String, List<Movie>>{};
+  final _getTopRatedMoviesCached = <String, List<MovieRepresentation>>{};
   final _getMovieDetailsCached = <String, List<Movie>>{};
 
   @override
@@ -46,10 +50,10 @@ class _MoviesRepositoryImpl
   }
 
   @override
-  Future<List<Movie>> getTopRatedMovies() async {
+  Future<List<MovieRepresentation>> getTopRatedMovies() async {
     final cachedValue = _getTopRatedMoviesCached[""];
     if (cachedValue == null) {
-      final List<Movie> toReturn;
+      final List<MovieRepresentation> toReturn;
       try {
         final result = super.getTopRatedMovies();
 

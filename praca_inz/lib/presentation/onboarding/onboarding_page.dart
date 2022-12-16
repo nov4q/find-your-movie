@@ -77,10 +77,10 @@ class _OnboardingPageBuilder extends HookWidget {
       subtitle: LocaleKeys.onboarding_subtitles_Watchlist.tr(),
     ),
     _OnboardingPageBody(
-      iconContent: Icons.local_movies, //jakas ikona oceny gwiazdka czy cos
+      iconContent: Icons.favorite,
       isLastPage: true,
-      title: LocaleKeys.onboarding_titles_Vote.tr(),
-      subtitle: LocaleKeys.onboarding_subtitles_Vote.tr(),
+      title: LocaleKeys.onboarding_titles_Favourites.tr(),
+      subtitle: LocaleKeys.onboarding_subtitles_favourites.tr(),
     ),
   ];
 

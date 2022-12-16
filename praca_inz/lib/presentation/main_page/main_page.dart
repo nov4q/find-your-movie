@@ -17,69 +17,19 @@ class MainPage extends HookWidget {
     final cubit = useBloc<AuthorizationCubit>();
     final state = useBlocBuilder(cubit);
 
-    final movieCubit = useBloc<MainPageCubit>();
-    final movieState = useBlocBuilder(movieCubit);
-
     useEffect(
       () {
         cubit.init();
-        movieCubit.init();
       },
-      [
-        cubit,
-        movieCubit,
-      ],
+      [cubit],
     );
 
     return state.maybeMap(
       authenticated: (state) {
-        return Scaffold(
-          backgroundColor: customTheme.background,
-          drawer: SideDrawer(
-            customTheme: customTheme,
-            authenticated: true,
-            name: state.username,
-            onLoginTileTap: () => cubit.signOutRequested(),
-          ),
-          appBar: AppBar(
-            backgroundColor: customTheme.primary90,
-            actions: [
-              GestureDetector(
-                onTap: () {},
-                child: const Padding(
-                  padding: EdgeInsets.only(
-                    right: AppDimens.ten,
-                  ),
-                  child: Icon(Icons.search),
-                ),
-              ),
-            ],
-          ),
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.only(left: AppDimens.l),
-              child: Column(
-                children: [
-                  HorizontalMovieScroll(
-                    movies: movieState.maybeMap(
-                      idle: (value) => value.allMoviesList,
-                      orElse: () => [],
-                    ),
-                    title: 'Wszystkie Filmy',
-                    onCoverTap: () {},
-                  ),
-                  HorizontalMovieScroll(
-                    movies: movieState.maybeMap(
-                      idle: (value) => value.allMoviesList,
-                      orElse: () => [],
-                    ),
-                    title: 'Najlepiej ocenianie',
-                    onCoverTap: () {},
-                  ),
-                ],
-              ),
-            ),
-          ),
+        return _AuthenticatedBody(
+          onLogout: cubit.signOutRequested,
+          customTheme: customTheme,
+          username: state.username,
         );
       },
       orElse: () {
@@ -107,6 +57,80 @@ class MainPage extends HookWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class _AuthenticatedBody extends HookWidget {
+  const _AuthenticatedBody({
+    required this.onLogout,
+    required this.username,
+    required this.customTheme,
+    Key? key,
+  }) : super(key: key);
+
+  final CustomAppTheme customTheme;
+  final String username;
+  final VoidCallback onLogout;
+
+  @override
+  Widget build(BuildContext context) {
+    final movieCubit = useBloc<MainPageCubit>();
+    final movieState = useBlocBuilder(movieCubit);
+
+    useEffect(
+      () {
+        movieCubit.init();
+      },
+      [movieCubit],
+    );
+
+    return Scaffold(
+      backgroundColor: customTheme.background,
+      drawer: SideDrawer(
+        customTheme: customTheme,
+        authenticated: true,
+        name: username,
+        onLoginTileTap: () => onLogout(),
+      ),
+      appBar: AppBar(
+        backgroundColor: customTheme.primary90,
+        actions: [
+          GestureDetector(
+            onTap: () {},
+            child: const Padding(
+              padding: EdgeInsets.only(
+                right: AppDimens.ten,
+              ),
+              child: Icon(Icons.search),
+            ),
+          ),
+        ],
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(left: AppDimens.l),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              HorizontalMovieScroll(
+                movies: movieState.maybeMap(
+                  idle: (value) => value.topRatedMoviesList,
+                  orElse: () => [],
+                ),
+                title: 'Najlepiej ocenianie',
+              ),
+              HorizontalMovieScroll(
+                movies: movieState.maybeMap(
+                  idle: (value) => value.favouriteMoviesList,
+                  orElse: () => [],
+                ),
+                title: 'Ulubione',
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

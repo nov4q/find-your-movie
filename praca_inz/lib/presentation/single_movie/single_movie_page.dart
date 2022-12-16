@@ -4,7 +4,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:praca_inzynierska/domain/firebase/models/movie/movie_model.f.dart';
-import 'package:praca_inzynierska/main.dart';
 import 'package:praca_inzynierska/presentation/single_movie/cubit/movie_details_cubit.dart';
 import 'package:praca_inzynierska/presentation/style/app_colors.dart';
 import 'package:praca_inzynierska/presentation/style/app_dimens.dart';
@@ -43,7 +42,10 @@ class SingleMovieDetailsPage extends HookWidget {
 
         return const Center(child: CircularProgressIndicator());
       },
-      idle: (value) => MovieDetailsPageBody(movie: value.movieDetails.first),
+      idle: (value) => MovieDetailsPageBody(
+        movie: value.movieDetails.first,
+        cubit: cubit,
+      ),
     );
   }
 }
@@ -51,9 +53,11 @@ class SingleMovieDetailsPage extends HookWidget {
 class MovieDetailsPageBody extends StatelessWidget {
   const MovieDetailsPageBody({
     required this.movie,
+    required this.cubit,
     Key? key,
   }) : super(key: key);
 
+  final MovieDetailsCubit cubit;
   final Movie movie;
 
   @override
@@ -112,12 +116,14 @@ class MovieDetailsPageBody extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             _RoundButton(
+                              onPressed: cubit.addToFavourites,
                               customTheme: customTheme,
                               iconWidget: SvgPicture.asset(AppIcon.emptyHeart),
                               iconFilledWidget:
                                   SvgPicture.asset(AppIcon.filledHeart),
                             ),
                             _RoundButton(
+                              onPressed: () {},
                               customTheme: customTheme,
                               iconWidget:
                                   const Icon(Icons.watch_later_outlined),
@@ -183,16 +189,17 @@ class _RoundButton extends StatelessWidget {
     required this.customTheme,
     required this.iconWidget,
     required this.iconFilledWidget,
+    required this.onPressed,
     Key? key,
   }) : super(key: key);
-
+  final VoidCallback onPressed;
   final CustomAppTheme customTheme;
   final Widget iconWidget;
   final Widget iconFilledWidget;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         shape: const CircleBorder(),
         backgroundColor: customTheme.primary10,

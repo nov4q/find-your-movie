@@ -18,9 +18,3 @@ class Movie with _$Movie {
   }
   ) = _Movie;
 }
-
-extension on Movie {
-  bool titleIsNotEmpty() {
-    return title.isNotEmpty;
-  }
-}
