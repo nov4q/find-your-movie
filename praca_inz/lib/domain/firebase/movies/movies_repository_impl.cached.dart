@@ -11,21 +11,29 @@ part of 'movies_repository_impl.dart';
 abstract class _$MoviesRepositoryImpl {
   MovieFromMovieDtoMapper get mapper;
   MovieRepresentationFromMovieRepresentationDtoMapper get representationMapper;
+  MovieRepresentationDtoFromMovieRepresentationMapper
+      get representationDtoMapper;
 }
 
 class _MoviesRepositoryImpl
     with MoviesRepositoryImpl
     implements _$MoviesRepositoryImpl {
-  _MoviesRepositoryImpl(this.mapper, this.representationMapper);
+  _MoviesRepositoryImpl(
+      this.mapper, this.representationMapper, this.representationDtoMapper);
 
   @override
   final MovieFromMovieDtoMapper mapper;
   @override
   final MovieRepresentationFromMovieRepresentationDtoMapper
       representationMapper;
+  @override
+  final MovieRepresentationDtoFromMovieRepresentationMapper
+      representationDtoMapper;
 
   final _getAllMoviesCached = <String, List<Movie>>{};
   final _getTopRatedMoviesCached = <String, List<MovieRepresentation>>{};
+  final _getSearchCollectionCached = <String, List<MovieRepresentation>>{};
+  final _getPopularMoviesCached = <String, List<MovieRepresentation>>{};
   final _getMovieDetailsCached = <String, List<Movie>>{};
 
   @override
@@ -63,6 +71,48 @@ class _MoviesRepositoryImpl
       } finally {}
 
       _getTopRatedMoviesCached[""] = toReturn;
+
+      return toReturn;
+    } else {
+      return cachedValue;
+    }
+  }
+
+  @override
+  Future<List<MovieRepresentation>> getSearchCollection() async {
+    final cachedValue = _getSearchCollectionCached[""];
+    if (cachedValue == null) {
+      final List<MovieRepresentation> toReturn;
+      try {
+        final result = super.getSearchCollection();
+
+        toReturn = await result;
+      } catch (_) {
+        rethrow;
+      } finally {}
+
+      _getSearchCollectionCached[""] = toReturn;
+
+      return toReturn;
+    } else {
+      return cachedValue;
+    }
+  }
+
+  @override
+  Future<List<MovieRepresentation>> getPopularMovies() async {
+    final cachedValue = _getPopularMoviesCached[""];
+    if (cachedValue == null) {
+      final List<MovieRepresentation> toReturn;
+      try {
+        final result = super.getPopularMovies();
+
+        toReturn = await result;
+      } catch (_) {
+        rethrow;
+      } finally {}
+
+      _getPopularMoviesCached[""] = toReturn;
 
       return toReturn;
     } else {

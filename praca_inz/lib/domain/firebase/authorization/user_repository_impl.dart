@@ -138,8 +138,19 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<void> addToUserWatchlist(MovieRepresentation movie) async {
-    // TODO: implement addToUserWatchlist
-    throw UnimplementedError();
+    final watchlistCollection =
+        firestore.collection('users/${currentUser.uid}/watchlist');
+    final MovieRepresentationDTO movieRepresentationDto =
+        representationDtomapper(
+      MovieRepresentation(
+        poster: movie.poster,
+        title: movie.title,
+      ),
+    );
+
+    await watchlistCollection
+        .doc(movie.title)
+        .set(movieRepresentationDto.toJson());
   }
 
   /// get User collection
@@ -167,8 +178,22 @@ class UserRepositoryImpl implements UserRepository {
   // @Cached()
   @override
   Future<List<MovieRepresentation>> getUserWatchlist() async {
-    // TODO: implement getUserWatchlist
-    throw UnimplementedError();
+    List<MovieRepresentationDTO> movies = [];
+
+    final watchlistCollection =
+        firestore.collection('users/${currentUser.uid}/watchlist');
+
+    await watchlistCollection.get().then(
+      (data) {
+        movies = data.docs
+            .map(
+              (movie) => MovieRepresentationDTO.fromJson(movie.data()),
+            )
+            .toList();
+      },
+    );
+
+    return movies.map((element) => representationMapper(element)).toList();
   }
 
   /// delete from user collection
@@ -186,7 +211,12 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<void> deleteFromUserWatchlist(MovieRepresentation movie) async {
-    // TODO: implement deleteFromUserWatchlist
-    throw UnimplementedError();
+    final watchlistCollection =
+        firestore.collection('users/${currentUser.uid}/watchlist');
+
+    await watchlistCollection.doc(movie.title).delete().then(
+          (doc) => print("Document deleted"),
+          onError: (e) => print("Error updating document $e"),
+        );
   }
 }

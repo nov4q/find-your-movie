@@ -12,11 +12,13 @@ class HorizontalMovieScroll extends StatelessWidget {
   const HorizontalMovieScroll({
     required this.title,
     required this.movies,
+    this.isUserCollection = false,
     Key? key,
   }) : super(key: key);
 
   final List<MovieRepresentation> movies;
   final String title;
+  final bool isUserCollection;
 
   @override
   Widget build(BuildContext context) {
@@ -86,10 +88,15 @@ class HorizontalMovieScroll extends StatelessWidget {
         ),
       );
     } else {
-      return Text(
-        "Wystąpił problem z kolekcją $title",
-        textAlign: TextAlign.center,
-        style: appTheme.style4,
+      return Padding(
+        padding: const EdgeInsets.only(top: AppDimens.m),
+        child: Text(
+          isUserCollection
+              ? "Dodaj swoje filmy do kolekcji ${title.toLowerCase()}"
+              : "Wystąpił problem z kolekcją $title",
+          textAlign: TextAlign.center,
+          style: appTheme.style4,
+        ),
       );
     }
   }

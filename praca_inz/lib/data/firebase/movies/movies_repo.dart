@@ -19,5 +19,14 @@ abstract class MoviesRepo {
 
   Future<List<MovieRepresentation>> getTopRatedMovies();
 
+  Future<List<MovieRepresentation>> getPopularMovies();
+
+  Future<List<MovieRepresentation>> getSearchCollection();
+
   Future<List<Movie>> getMovieDetails(String title);
+
+  Future<void> addToCollection(
+    List<Movie> movies,
+    String collectionName,
+  );
 }

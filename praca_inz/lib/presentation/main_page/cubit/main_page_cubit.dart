@@ -15,14 +15,17 @@ class MainPageCubit extends Cubit<MainPageState> {
 
   List<Movie> allMoviesList = [];
   List<MovieRepresentation> topRatedMoviesList = [];
+  List<MovieRepresentation> popularMoviesList = [];
   List<MovieRepresentation> favouriteMoviesList = [];
   List<MovieRepresentation> userWatchlist = [];
 
   Future<void> init() async {
     try {
+      await getMovies();
       await getTopRatedMovies();
+      await getPopularMovies();
       await getFavouriteMovies();
-      // await getWatchlist(); //TODO: implement
+      await getWatchlist();
       _emitIdle();
     } catch (e) {
       print(e);
@@ -32,6 +35,7 @@ class MainPageCubit extends Cubit<MainPageState> {
   void _emitIdle() => emit(_Idle(
         allMoviesList: allMoviesList,
         topRatedMoviesList: topRatedMoviesList,
+        popularMoviesList: popularMoviesList,
         favouriteMoviesList: favouriteMoviesList,
         userWatchlist: userWatchlist,
       ));
@@ -42,6 +46,9 @@ class MainPageCubit extends Cubit<MainPageState> {
   Future<void> getTopRatedMovies() async =>
       topRatedMoviesList = await _moviesUseCase.getTopRatedMoviesUseCase();
 
+  Future<void> getPopularMovies() async =>
+      popularMoviesList = await _moviesUseCase.getPopularMoviesUseCase();
+
   Future<void> getFavouriteMovies() async =>
       favouriteMoviesList = await _moviesUseCase.getFavouriteMovies();
 
@@ -50,6 +57,20 @@ class MainPageCubit extends Cubit<MainPageState> {
 
   String getName() => allMoviesList.first.title;
 
-  Future<void> getMovieDetails(String title) =>
+  Future<void> getMovieDetails(String title) async =>
       _moviesUseCase.getSingleMovieDetails(title);
+
+  Future<void> addToCollection(
+    List<Movie> movies,
+    String collectionName,
+  ) async {
+    try {
+      _moviesUseCase.addToCustomCollection(
+        movies,
+        collectionName,
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
 }

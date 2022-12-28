@@ -123,7 +123,7 @@ class MovieDetailsPageBody extends StatelessWidget {
                                   SvgPicture.asset(AppIcon.filledHeart),
                             ),
                             _RoundButton(
-                              onPressed: () {},
+                              onPressed: cubit.addToUserWatchlist,
                               customTheme: customTheme,
                               iconWidget:
                                   const Icon(Icons.watch_later_outlined),
@@ -141,9 +141,29 @@ class MovieDetailsPageBody extends StatelessWidget {
                         movie.genre,
                         style: customTheme.style7,
                       ),
+                      Text(
+                        movie.year,
+                        style: customTheme.style7,
+                      ),
                       CustomDivider(customTheme: customTheme),
                       Text(
                         movie.plot,
+                        style: customTheme.style7,
+                      ),
+                      CustomDivider(
+                        customTheme: customTheme,
+                        visible: false,
+                      ),
+                      Text(
+                        "Obsada\n${movie.actors}",
+                        style: customTheme.style7,
+                      ),
+                      CustomDivider(
+                        customTheme: customTheme,
+                        visible: false,
+                      ),
+                      Text(
+                        movie.awards,
                         style: customTheme.style7,
                       ),
                     ],
@@ -166,17 +186,19 @@ class MovieDetailsPageBody extends StatelessWidget {
 class CustomDivider extends StatelessWidget {
   const CustomDivider({
     required this.customTheme,
+    this.visible = true,
     Key? key,
   }) : super(key: key);
 
   final CustomAppTheme customTheme;
+  final bool visible;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: AppDimens.s),
       child: Container(
-        color: customTheme.divider,
+        color: visible ? customTheme.divider : Colors.transparent,
         height: AppDimens.one,
         width: double.infinity,
       ),

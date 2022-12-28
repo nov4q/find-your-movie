@@ -42,4 +42,43 @@ class MovieDetailsCubit extends Cubit<MovieDetailsState> {
       emit(_Error(e.toString()));
     }
   }
+
+  Future<void> deleteFromFavourites() async {
+    try {
+      await _moviesUseCase.deleteFromFavourites(
+        MovieRepresentation(
+          title: movieDetails.first.title,
+          poster: movieDetails.first.poster,
+        ),
+      );
+    } catch (e) {
+      emit(_Error(e.toString()));
+    }
+  }
+
+  Future<void> deleteFromWatchlist() async {
+    try {
+      await _moviesUseCase.deleteFromWatchlist(
+        MovieRepresentation(
+          title: movieDetails.first.title,
+          poster: movieDetails.first.poster,
+        ),
+      );
+    } catch (e) {
+      emit(_Error(e.toString()));
+    }
+  }
+
+  Future<void> addToUserWatchlist() async {
+    try {
+      await _moviesUseCase.addToWatchlist(
+        MovieRepresentation(
+          title: movieDetails.first.title,
+          poster: movieDetails.first.poster,
+        ),
+      );
+    } catch (e) {
+      emit(_Error(e.toString()));
+    }
+  }
 }

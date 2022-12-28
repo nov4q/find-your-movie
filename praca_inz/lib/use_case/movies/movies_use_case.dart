@@ -6,22 +6,30 @@ import 'package:praca_inzynierska/domain/firebase/models/movie/movie_representat
 
 @injectable
 class MoviesUseCase {
-  final MoviesRepo _authRepository;
+  final MoviesRepo _moviesRepository;
   final UserRepository _userRepository;
 
   MoviesUseCase(
-    this._authRepository,
+    this._moviesRepository,
     this._userRepository,
   );
 
+  /// get movies collections
   Future<List<Movie>> getAllMoviesUseCase() async =>
-      _authRepository.getAllMovies();
+      _moviesRepository.getAllMovies();
 
   Future<List<MovieRepresentation>> getTopRatedMoviesUseCase() async =>
-      _authRepository.getTopRatedMovies();
+      _moviesRepository.getTopRatedMovies();
+
+  Future<List<MovieRepresentation>> getPopularMoviesUseCase() async =>
+      _moviesRepository.getPopularMovies();
 
   Future<List<Movie>> getSingleMovieDetails(String title) async =>
-      _authRepository.getMovieDetails(title);
+      _moviesRepository.getMovieDetails(title);
+
+  /// get search collection
+  Future<List<MovieRepresentation>> getSearchCollection() async =>
+      _moviesRepository.getSearchCollection();
 
   /// get users collection
   Future<List<MovieRepresentation>> getFavouriteMovies() async =>
@@ -45,4 +53,13 @@ class MoviesUseCase {
   Future<void> deleteFromWatchlist(
           MovieRepresentation movieRepresentation) async =>
       _userRepository.deleteFromUserWatchlist(movieRepresentation);
+
+  Future<void> addToCustomCollection(
+    List<Movie> movies,
+    String collectionName,
+  ) async =>
+      _moviesRepository.addToCollection(
+        movies,
+        collectionName,
+      );
 }
