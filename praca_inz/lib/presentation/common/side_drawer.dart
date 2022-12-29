@@ -28,7 +28,7 @@ class SideDrawer extends StatelessWidget {
           DrawerHeader(
             decoration: BoxDecoration(color: customTheme.primary10),
             child: Text(
-              authenticated ? 'Hello $name' : 'Unauthenticated',
+              authenticated ? 'Witaj $name' : 'Niezalogowano',
             ),
           ),
           ListTile(
@@ -44,18 +44,6 @@ class SideDrawer extends StatelessWidget {
             ),
             onTap: () => onLoginTileTap(),
           ),
-          if (authenticated)
-            ListTile(
-              title: Row(
-                children: [
-                  const Icon(Icons.search),
-                  Text(LocaleKeys.search_SearchField.tr()),
-                ],
-              ),
-              onTap: () => context.router.push(const SearchPageRoute()),
-            )
-          else
-            const SizedBox.shrink(),
         ],
       ),
     );

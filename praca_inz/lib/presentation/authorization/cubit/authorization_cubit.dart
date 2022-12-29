@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:praca_inzynierska/presentation/style/app_dimens.dart';
 import 'package:praca_inzynierska/use_case/authorization/auth_use_case.dart';
 
 part 'authorization_state.dart';
@@ -47,7 +48,6 @@ class AuthorizationCubit extends Cubit<AuthorizationState> {
       );
       emit(_Authenticated(
         username: username,
-        // currentUser: currentUser,
       ));
     } catch (e) {
       emit(_AuthError(e.toString()));

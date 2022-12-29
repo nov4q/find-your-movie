@@ -7,6 +7,7 @@ import 'package:praca_inzynierska/presentation/common/side_drawer.dart';
 import 'package:praca_inzynierska/presentation/main_page/cubit/main_page_cubit.dart';
 import 'package:praca_inzynierska/presentation/main_page/widgets/horizontal_movie_scroll.dart';
 import 'package:praca_inzynierska/presentation/routing/main_router.gr.dart';
+import 'package:praca_inzynierska/presentation/single_movie/single_movie_page.dart';
 import 'package:praca_inzynierska/presentation/style/app_dimens.dart';
 import 'package:praca_inzynierska/presentation/style/app_themes.dart';
 
@@ -47,18 +48,76 @@ class MainPage extends HookWidget {
             backgroundColor: customTheme.primary90,
           ),
           body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.only(left: AppDimens.l),
-              child: Text(
-                'unAuthenticated',
-                style: customTheme.style10.copyWith(
-                  color: customTheme.error100,
-                ),
-              ),
+            child: _UnAuthenticatedBody(
+              customTheme: customTheme,
             ),
           ),
         );
       },
+    );
+  }
+}
+
+class _UnAuthenticatedBody extends HookWidget {
+  const _UnAuthenticatedBody({
+    required this.customTheme,
+    Key? key,
+  }) : super(key: key);
+
+  final CustomAppTheme customTheme;
+
+  @override
+  Widget build(BuildContext context) {
+    final movieCubit = useBloc<MainPageCubit>();
+    final movieState = useBlocBuilder(movieCubit);
+
+    useEffect(
+      () {
+        movieCubit.initUnauthenticated();
+      },
+      [movieCubit],
+    );
+
+    return movieState.maybeMap(
+      orElse: () => Center(
+        child: CircularProgressIndicator(
+          color: customTheme.primary100,
+        ),
+      ),
+      unAuthenticated: (value) => SafeArea(
+        child: Column(
+          children: [
+            HorizontalMovieScroll(
+              movies: movieState.mapOrNull(
+                unAuthenticated: (value) => value.topRatedMoviesList,
+              ),
+              unAuthenticated: true,
+              title: 'Przykładowe filmy',
+            ),
+            Padding(
+              padding: const EdgeInsets.all(AppDimens.sm),
+              child: CustomDivider(customTheme: customTheme),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppDimens.sm),
+              child: Text(
+                'Jeśli chcesz w pełni uzywać aplikacji i zobaczyć pełną listę filmów,',
+                textAlign: TextAlign.center,
+                style: customTheme.style6,
+                maxLines: 4,
+              ),
+            ),
+            const SizedBox(
+              height: AppDimens.sm,
+            ),
+            Text(
+              'zaloguj się juz teraz!',
+              style: customTheme.style6,
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -109,59 +168,47 @@ class _AuthenticatedBody extends HookWidget {
           ),
         ],
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(left: AppDimens.l),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // movieState.maybeMap(
-                //   idle: (value) => TextButton(
-                //     onPressed: () async => movieCubit.addToCollection(
-                //       [
-                //         value.allMoviesList[15],
-                //         value.allMoviesList[14],
-                //         value.allMoviesList[10],
-                //         value.allMoviesList[1],
-                //       ],
-                //       'popular-movies',
-                //     ),
-                //     child: const Text('Magia'),
-                //   ),
-                //   orElse: () => const SizedBox.shrink(),
-                // ),
-                HorizontalMovieScroll(
-                  movies: movieState.maybeMap(
-                    idle: (value) => value.popularMoviesList,
-                    orElse: () => [],
+      body: movieState.maybeMap(
+        orElse: () => Center(
+          child: CircularProgressIndicator(
+            color: customTheme.primary100,
+          ),
+        ),
+        idle: (value) => SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(left: AppDimens.l),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  HorizontalMovieScroll(
+                    movies: movieState.mapOrNull(
+                      idle: (value) => value.popularMoviesList,
+                    ),
+                    title: 'Popularne',
                   ),
-                  title: 'Popularne',
-                ),
-                HorizontalMovieScroll(
-                  movies: movieState.maybeMap(
-                    idle: (value) => value.topRatedMoviesList,
-                    orElse: () => [],
+                  HorizontalMovieScroll(
+                    movies: movieState.mapOrNull(
+                      idle: (value) => value.topRatedMoviesList,
+                    ),
+                    title: 'Najlepiej ocenianie',
                   ),
-                  title: 'Najlepiej ocenianie',
-                ),
-                HorizontalMovieScroll(
-                  movies: movieState.maybeMap(
-                    idle: (value) => value.favouriteMoviesList,
-                    orElse: () => [],
+                  HorizontalMovieScroll(
+                    movies: movieState.mapOrNull(
+                      idle: (value) => value.favouriteMoviesList,
+                    ),
+                    isUserCollection: true,
+                    title: 'Ulubione',
                   ),
-                  isUserCollection: true,
-                  title: 'Ulubione',
-                ),
-                HorizontalMovieScroll(
-                  movies: movieState.maybeMap(
-                    idle: (value) => value.userWatchlist,
-                    orElse: () => [],
+                  HorizontalMovieScroll(
+                    movies: movieState.mapOrNull(
+                      idle: (value) => value.userWatchlist,
+                    ),
+                    isUserCollection: true,
+                    title: 'Lista do obejrzenia',
                   ),
-                  isUserCollection: true,
-                  title: 'Lista do obejrzenia',
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

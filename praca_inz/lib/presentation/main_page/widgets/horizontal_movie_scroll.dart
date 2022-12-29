@@ -13,17 +13,19 @@ class HorizontalMovieScroll extends StatelessWidget {
     required this.title,
     required this.movies,
     this.isUserCollection = false,
+    this.unAuthenticated = false,
     Key? key,
   }) : super(key: key);
 
-  final List<MovieRepresentation> movies;
+  final List<MovieRepresentation>? movies;
   final String title;
   final bool isUserCollection;
+  final bool unAuthenticated;
 
   @override
   Widget build(BuildContext context) {
     final appTheme = context.customAppTheme;
-    if (movies.isNotEmpty) {
+    if ((movies?.isNotEmpty) ?? false) {
       return Padding(
         padding: const EdgeInsets.only(top: AppDimens.m),
         child: Column(
@@ -37,7 +39,7 @@ class HorizontalMovieScroll extends StatelessWidget {
             SizedBox(
               height: AppDimens.g,
               child: ListView.separated(
-                itemCount: movies.length,
+                itemCount: movies!.length,
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 separatorBuilder: (context, index) => const VerticalDivider(
@@ -50,12 +52,16 @@ class HorizontalMovieScroll extends StatelessWidget {
                       height: AppDimens.g,
                       width: AppDimens.d,
                       child: GestureDetector(
-                        onTap: () => navigateToMovieDetailsPage(
-                          context: context,
-                          title: movies[index].title,
-                        ),
+                        onTap: () {
+                          if (!unAuthenticated) {
+                            navigateToMovieDetailsPage(
+                              context: context,
+                              title: movies![index].title,
+                            );
+                          }
+                        },
                         child: CachedNetworkImage(
-                          imageUrl: movies[index].poster,
+                          imageUrl: movies![index].poster,
                           fit: BoxFit.cover,
                           errorWidget: (
                             context,
@@ -70,7 +76,7 @@ class HorizontalMovieScroll extends StatelessWidget {
                                 child: Padding(
                                   padding: const EdgeInsets.all(AppDimens.ten),
                                   child: Text(
-                                    movies[index].title,
+                                    movies![index].title,
                                     textAlign: TextAlign.center,
                                   ),
                                 ),

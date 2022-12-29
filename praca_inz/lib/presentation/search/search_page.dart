@@ -49,6 +49,7 @@ class SearchPage extends HookWidget {
                   icon: const Icon(Icons.clear),
                 ),
                 hintText: LocaleKeys.search_SearchField.tr(),
+                hintStyle: TextStyle(color: customTheme.main),
                 border: InputBorder.none,
               ),
               onChanged: (query) => cubit.searchMovie(query),

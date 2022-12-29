@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:praca_inzynierska/domain/firebase/models/movie/movie_model.f.dart';
 import 'package:praca_inzynierska/domain/firebase/models/movie/movie_representation_model.f.dart';
+import 'package:praca_inzynierska/presentation/style/app_dimens.dart';
 import 'package:praca_inzynierska/use_case/movies/movies_use_case.dart';
 
 part 'main_page_state.dart';
@@ -26,7 +27,18 @@ class MainPageCubit extends Cubit<MainPageState> {
       await getPopularMovies();
       await getFavouriteMovies();
       await getWatchlist();
+      await Future.delayed(AppDimens.duration1s);
       _emitIdle();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> initUnauthenticated() async {
+    try {
+      await getTopRatedMovies();
+      await Future.delayed(AppDimens.duration1s);
+      _emitUnauth();
     } catch (e) {
       print(e);
     }
@@ -39,6 +51,8 @@ class MainPageCubit extends Cubit<MainPageState> {
         favouriteMoviesList: favouriteMoviesList,
         userWatchlist: userWatchlist,
       ));
+  void _emitUnauth() =>
+      emit(_UnAuthenticated(topRatedMoviesList: topRatedMoviesList));
 
   Future<void> getMovies() async =>
       allMoviesList = await _moviesUseCase.getAllMoviesUseCase();
