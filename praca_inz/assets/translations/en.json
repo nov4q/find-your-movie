@@ -3,19 +3,19 @@
         "ViewAll":"View all"
     },
     "onboarding":{
-        "skip":"Skip",
-        "GotIt":"Got it",
+        "skip":"Pomiń",
+        "GotIt":"Wszystko wiem!",
         "titles":{
-            "Explore":"Explore",
-            "WhatsPopular":"Popular?",
-            "Watchlist":"Add to watchlist",
-            "Favourites":"Favourites"
+            "Explore":"Odkrywaj",
+            "WhatsPopular":"Popularne?",
+            "Watchlist":"Dodaj do listy do obejrzenia!",
+            "Favourites":"Ulubione"
         },
         "subtitles":{
-            "Explore":"Explore and find new exciting movies!",
-            "WhatsPopular":"Find currently popular movies!",
-            "Watchlist":"Add intriguing movies to your watchlist!",
-            "favourites":"Add to favourites!"
+            "Explore":"Odkrywaj i znajduj, nowe, ekscytujące dzieła kinematografii!",
+            "WhatsPopular":"Sprawdź co jest obecnie popularne!",
+            "Watchlist":"Dodaj intrygujące Cię filmy do listy do obejrzenia i nie zastanawiaj się co obejrzeć!",
+            "favourites":"Dodawaj swoje ulubione filmy do prywatnej kolekcji!"
         }
     },
     "welcome":{
@@ -33,7 +33,7 @@
     "search":{
         "SearchNotice" : "Type something to search",
         "ResultsNotFoundNotice" : "No results found",
-        "SearchField" : "Search",
+        "SearchField" : "Wyszukaj tutaj!",
         "TitleNotFound" : "Title Not Found",
         "YearNotFound" : "Year not found"
     },

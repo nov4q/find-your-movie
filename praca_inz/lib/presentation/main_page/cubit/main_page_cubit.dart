@@ -34,6 +34,17 @@ class MainPageCubit extends Cubit<MainPageState> {
     }
   }
 
+  Future<void> refreshPersonalColections() async {
+    try {
+      await getFavouriteMovies();
+      await getWatchlist();
+      await Future.delayed(AppDimens.duration1s);
+      _emitIdle();
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Future<void> initUnauthenticated() async {
     try {
       await getTopRatedMovies();

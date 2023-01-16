@@ -48,11 +48,15 @@ abstract class MoviesRepositoryImpl
     return _movieList.map((element) => mapper(element)).toList();
   }
 
+  // Adnotacja zapewniająca cache'owanie danych 
   @Cached()
   @override
   Future<List<MovieRepresentation>> getTopRatedMovies() async {
+    // Odwołanie do kolekcji
     final allMoviesCollection = firestore.collection('top-rated-movies');
+    // Zapytanie do firestore
     await allMoviesCollection.get().then(
+      // Mapowanie wyniku do listy modelów DTO
       (data) {
         _movieRepresentationList = data.docs
             .map(
@@ -61,7 +65,7 @@ abstract class MoviesRepositoryImpl
             .toList();
       },
     );
-
+    // Zwrócenie zmapowanej listy obiektów DTO do listy obiektów domenowych
     return _movieRepresentationList
         .map((element) => representationMapper(element))
         .toList();

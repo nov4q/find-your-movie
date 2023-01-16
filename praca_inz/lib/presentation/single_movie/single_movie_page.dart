@@ -112,23 +112,60 @@ class MovieDetailsPageBody extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: AppDimens.l),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        child: Column(
                           children: [
-                            _RoundButton(
-                              onPressed: cubit.addToFavourites,
-                              customTheme: customTheme,
-                              iconWidget: SvgPicture.asset(AppIcon.emptyHeart),
-                              iconFilledWidget:
-                                  SvgPicture.asset(AppIcon.filledHeart),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                _RoundButton(
+                                  toastText:
+                                      "Pomyślnie dodano do Twojej kolekcji ulubionych filmów",
+                                  onPressed: cubit.addToFavourites,
+                                  customTheme: customTheme,
+                                  iconWidget:
+                                      SvgPicture.asset(AppIcon.filledHeart),
+                                  iconFilledWidget:
+                                      SvgPicture.asset(AppIcon.filledHeart),
+                                ),
+                                _RoundButton(
+                                  toastText:
+                                      "Pomyślnie dodano do Twojej kolekcji zawierającej listę filmów do zobaczenia później",
+                                  onPressed: cubit.addToUserWatchlist,
+                                  customTheme: customTheme,
+                                  iconWidget:
+                                      const Icon(Icons.watch_later_rounded),
+                                  iconFilledWidget:
+                                      const Icon(Icons.watch_later_rounded),
+                                ),
+                              ],
                             ),
-                            _RoundButton(
-                              onPressed: cubit.addToUserWatchlist,
-                              customTheme: customTheme,
-                              iconWidget:
-                                  const Icon(Icons.watch_later_outlined),
-                              iconFilledWidget:
-                                  const Icon(Icons.watch_later_rounded),
+                            const SizedBox(
+                              height: AppDimens.m,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                _RoundButton(
+                                  toastText:
+                                      "Pomyślnie usunięto film z Twojej kolekcji ulubionych filmów",
+                                  onPressed: cubit.deleteFromFavourites,
+                                  customTheme: customTheme,
+                                  iconWidget:
+                                      SvgPicture.asset(AppIcon.emptyHeart),
+                                  iconFilledWidget:
+                                      SvgPicture.asset(AppIcon.emptyHeart),
+                                ),
+                                _RoundButton(
+                                  toastText:
+                                      "Pomyślnie usunięto film z Twojej kolekcji filmów do zobaczenia w przyszłości",
+                                  onPressed: cubit.deleteFromWatchlist,
+                                  customTheme: customTheme,
+                                  iconWidget:
+                                      const Icon(Icons.watch_later_outlined),
+                                  iconFilledWidget:
+                                      const Icon(Icons.watch_later_outlined),
+                                ),
+                              ],
                             ),
                           ],
                         ),
@@ -163,7 +200,24 @@ class MovieDetailsPageBody extends StatelessWidget {
                         visible: false,
                       ),
                       Text(
-                        movie.awards,
+                        "Reyżser\n${movie.director}",
+                        style: customTheme.style7,
+                      ),
+                      CustomDivider(
+                        customTheme: customTheme,
+                        visible: false,
+                      ),
+                      Text(
+                        "Nagrody\n${movie.awards}",
+                        style: customTheme.style7,
+                      ),
+                      CustomDivider(
+                        customTheme: customTheme,
+                        visible: true,
+                      ),
+                      Text(
+                        "Żródło plakatu\n${movie.poster}",
+                        maxLines: 5,
                         style: customTheme.style7,
                       ),
                     ],
@@ -213,15 +267,23 @@ class _RoundButton extends StatelessWidget {
     required this.iconFilledWidget,
     required this.onPressed,
     Key? key,
+    this.toastText,
   }) : super(key: key);
   final VoidCallback onPressed;
   final CustomAppTheme customTheme;
   final Widget iconWidget;
   final Widget iconFilledWidget;
+  final String? toastText;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: onPressed,
+      onPressed: () {
+        onPressed();
+        if ((toastText?.isNotEmpty) ?? false) {
+          final snackBar = SnackBar(content: Text(toastText!));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
+      },
       style: ElevatedButton.styleFrom(
         shape: const CircleBorder(),
         backgroundColor: customTheme.primary10,

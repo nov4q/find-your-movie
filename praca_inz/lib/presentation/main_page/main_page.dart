@@ -87,6 +87,14 @@ class _UnAuthenticatedBody extends HookWidget {
       unAuthenticated: (value) => SafeArea(
         child: Column(
           children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: AppDimens.sm),
+              child: Text(
+                'Witaj w aplikacji!',
+                style: customTheme.style6,
+                textAlign: TextAlign.start,
+              ),
+            ),
             HorizontalMovieScroll(
               movies: movieState.mapOrNull(
                 unAuthenticated: (value) => value.topRatedMoviesList,
@@ -169,45 +177,51 @@ class _AuthenticatedBody extends HookWidget {
         ],
       ),
       body: movieState.maybeMap(
-        orElse: () => Center(
+        orElse: () => 
+        Center(
           child: CircularProgressIndicator(
             color: customTheme.primary100,
           ),
         ),
-        idle: (value) => SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(left: AppDimens.l),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  HorizontalMovieScroll(
-                    movies: movieState.mapOrNull(
-                      idle: (value) => value.popularMoviesList,
+        idle: (value) => RefreshIndicator(
+          color: customTheme.primary100,
+          backgroundColor: customTheme.background,
+          onRefresh: movieCubit.refreshPersonalColections,
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(left: AppDimens.l),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    HorizontalMovieScroll(
+                      movies: movieState.mapOrNull(
+                        idle: (value) => value.popularMoviesList,
+                      ),
+                      title: 'Popularne',
                     ),
-                    title: 'Popularne',
-                  ),
-                  HorizontalMovieScroll(
-                    movies: movieState.mapOrNull(
-                      idle: (value) => value.topRatedMoviesList,
+                    HorizontalMovieScroll(
+                      movies: movieState.mapOrNull(
+                        idle: (value) => value.topRatedMoviesList,
+                      ),
+                      title: 'Najlepiej ocenianie',
                     ),
-                    title: 'Najlepiej ocenianie',
-                  ),
-                  HorizontalMovieScroll(
-                    movies: movieState.mapOrNull(
-                      idle: (value) => value.favouriteMoviesList,
+                    HorizontalMovieScroll(
+                      movies: movieState.mapOrNull(
+                        idle: (value) => value.favouriteMoviesList,
+                      ),
+                      isUserCollection: true,
+                      title: 'Ulubione',
                     ),
-                    isUserCollection: true,
-                    title: 'Ulubione',
-                  ),
-                  HorizontalMovieScroll(
-                    movies: movieState.mapOrNull(
-                      idle: (value) => value.userWatchlist,
+                    HorizontalMovieScroll(
+                      movies: movieState.mapOrNull(
+                        idle: (value) => value.userWatchlist,
+                      ),
+                      isUserCollection: true,
+                      title: 'Lista do obejrzenia',
                     ),
-                    isUserCollection: true,
-                    title: 'Lista do obejrzenia',
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

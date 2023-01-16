@@ -38,6 +38,7 @@ class SearchPage extends HookWidget {
           color: Colors.white,
           child: Center(
             child: TextField(
+              style: const TextStyle(color: Colors.black),
               controller: textfieldController,
               decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.search),
@@ -49,7 +50,10 @@ class SearchPage extends HookWidget {
                   icon: const Icon(Icons.clear),
                 ),
                 hintText: LocaleKeys.search_SearchField.tr(),
-                hintStyle: TextStyle(color: customTheme.main),
+                hintStyle: const TextStyle(
+                  color: Colors.black,
+                  overflow: TextOverflow.fade,
+                ),
                 border: InputBorder.none,
               ),
               onChanged: (query) => cubit.searchMovie(query),
