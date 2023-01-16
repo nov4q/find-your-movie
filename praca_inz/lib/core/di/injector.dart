@@ -1,11 +1,11 @@
-import 'package:get_it/get_it.dart';
-import 'package:injectable/injectable.dart';
+// import 'package:get_it/get_it.dart';
+// import 'package:injectable/injectable.dart';
 
-import 'injector.config.dart';
+// import 'injector.config.dart';
 
-final getIt = GetIt.instance;
+// final getIt = GetIt.instance;
 
-@InjectableInit(preferRelativeImports: false)
-Future<void> configureDependencies() async {
-  $initGetIt(getIt);
-}
+// @InjectableInit(preferRelativeImports: false)
+// Future<void> configureDependencies() async {
+//   $initGetIt(getIt);
+// }
