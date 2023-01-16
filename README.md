@@ -15,11 +15,6 @@ The application has been implemented within the scope of an engineering project 
 3. Connect the app to your Firebase project by following the instructions on the [Firebase website](https://firebase.google.com/docs/flutter/setup)
 4. Run the app on an emulator or physical device using the command `flutter run`
 
-### Screenshots
-
-![Movie Details Screen](https://imgur.com/a/oHhcRat)
-![About Screen](https://imgur.com/a/1hqkm4Z)
-
 ### Note
 This application is a sample and is not intended for production use. It is for educational purposes only.
 
