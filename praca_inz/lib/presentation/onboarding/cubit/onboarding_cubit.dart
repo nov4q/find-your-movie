@@ -17,7 +17,6 @@ class OnboardingCubit extends Cubit<OnboardingState> {
 
   Future<void> displayOnboarding() async {
     emit(const _Loading());
-    // _onboardingUseCase.resetOnboardingCond();
     await Future.delayed(AppDimens.duration800ms);
     try {
       if (await _onboardingUseCase.getOnboardingCond()) {

@@ -4,7 +4,7 @@ part of 'main_page_cubit.dart';
 class MainPageState with _$MainPageState {
   const factory MainPageState.initial() = _Initial;
   const factory MainPageState.idle({
-    required List<Movie> allMoviesList, //TODO (QBA) sprawdzic czy mozna wywalic
+    required List<Movie> allMoviesList,
     required List<MovieRepresentation> topRatedMoviesList,
     required List<MovieRepresentation> popularMoviesList,
     required List<MovieRepresentation> favouriteMoviesList,

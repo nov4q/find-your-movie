@@ -34,9 +34,6 @@ class CustomTextInputField extends HookWidget {
       borderRadius: BorderRadius.circular(32.0),
       borderSide: BorderSide(color: theme.element),
     );
-    // UnderlineInputBorder(
-    //   borderSide: BorderSide(color: theme.element),
-    // );
 
     return TextFormField(
       controller: textController,
