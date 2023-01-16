@@ -12,9 +12,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await configureDependencies();
-  // final WidgetsBinding widgetsBinding =
-  //     WidgetsFlutterBinding.ensureInitialized();
-  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await Firebase.initializeApp();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -51,7 +48,7 @@ class MyApp extends StatelessWidget {
       locale: context.locale,
       routeInformationParser: _mainRouter.defaultRouteParser(),
       routerDelegate: _mainRouter.delegate(),
-      title: 'inz',
+      title: 'Find Your Movie',
       theme: ThemeData.light().copyWith(
         extensions: <ThemeExtension<dynamic>>[
           CustomAppTheme.lightTheme,
