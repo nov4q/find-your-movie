@@ -8,9 +8,17 @@ part 'authorization_cubit.freezed.dart';
 
 @injectable
 class AuthorizationCubit extends Cubit<AuthorizationState> {
+  AuthorizationCubit(
+    this._authUseCase,
+  ) : super(const AuthorizationState.unAuthenticated());
+
   final AuthUseCase _authUseCase;
-  AuthorizationCubit(this._authUseCase)
-      : super(const AuthorizationState.unAuthenticated());
+  String username = '';
+  // late User currentUser;
+
+  void init() {
+    emit(const _UnAuthenticated());
+  }
 
   Future<void> signInRequested(String email, String password) async {
     emit(const _Loading());
@@ -19,8 +27,11 @@ class AuthorizationCubit extends Cubit<AuthorizationState> {
         email,
         password,
       );
-
-      emit(const _Authenticated());
+      username = await _authUseCase.getUsername();
+      emit(_Authenticated(
+        username: username,
+        // currentUser: currentUser,
+      ));
     } catch (e) {
       emit(_AuthError(e.toString()));
       emit(const _UnAuthenticated());
@@ -34,7 +45,9 @@ class AuthorizationCubit extends Cubit<AuthorizationState> {
         email,
         password,
       );
-      emit(const _Authenticated());
+      emit(_Authenticated(
+        username: username,
+      ));
     } catch (e) {
       emit(_AuthError(e.toString()));
       emit(const _UnAuthenticated());
@@ -45,7 +58,12 @@ class AuthorizationCubit extends Cubit<AuthorizationState> {
     emit(const _Loading());
     try {
       await _authUseCase.signInWithGoogleUseCase();
-      emit(const _Authenticated());
+
+      username = await _authUseCase.getUsername();
+      emit(_Authenticated(
+        username: username,
+        // currentUser: currentUser,
+      ));
     } catch (e) {
       emit(_AuthError(e.toString()));
       emit(const _UnAuthenticated());
@@ -54,6 +72,7 @@ class AuthorizationCubit extends Cubit<AuthorizationState> {
 
   Future<void> signOutRequested() async {
     emit(const _Loading());
+
     await _authUseCase.signOutUseCase();
     emit(const _UnAuthenticated());
   }

@@ -1,9 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
-import 'package:praca_inzynierska/domain/authorization/auth_repository.dart';
+import 'package:praca_inzynierska/data/firebase/authorization/user_repository.dart';
 
 @injectable
 class AuthUseCase {
-  final AuthRepository _authRepository;
+  final UserRepository _authRepository;
 
   AuthUseCase(this._authRepository);
 
@@ -23,4 +24,8 @@ class AuthUseCase {
         email: email,
         password: password,
       );
+
+  Future<User> getUser() async => _authRepository.currentUser;
+
+  Future<String> getUsername() async => _authRepository.currentUsername;
 }

@@ -129,6 +129,13 @@ class AppTypography {
     fontSize: 11,
     height: 1.45,
   );
+
+  static const TextStyle styleTitle = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.w700,
+    fontSize: 26,
+    height: 1.6,
+  );
 }
 
 extension SetMainTextColor on TextStyle {

@@ -8,12 +8,12 @@ part 'login_form_cubit.freezed.dart';
 
 @Injectable()
 class LoginFormCubit extends Cubit<LoginFormState> {
-  LoginFormCubit() : super(LoginFormState.initial());
+  LoginFormCubit() : super(const LoginFormState.initial());
 
   String _cachedLogin = '';
   String _cachedPassword = '';
   bool _isPasswordObscure = true;
-  bool _loginError = false;
+  final bool _loginError = false;
 
   void init() {
     _emitIdle();
