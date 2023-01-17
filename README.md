@@ -2,6 +2,9 @@
 A mobile application built with Flutter and Firebase (Firestore) for searching and discovering movies.
 The application has been implemented within the scope of an engineering project at Silesian University of Technology.
 
+## Presentation
+[Polsl Onedrive](https://polslpl-my.sharepoint.com/:v:/g/personal/jakunow179_student_polsl_pl/EXaFiyH5TadGoCv8V4s0JJoBlNFFNix727UBBUg5fCHY0Q?e=JJqZhy)
+
 ### Features
 - Search for movies by title
 - View movie details and information
